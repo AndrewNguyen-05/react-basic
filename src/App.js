@@ -28,6 +28,13 @@ function App() {
     setAddress(event.target.value);
   }
 
+  const handleKeyPress = (event) => {
+    if(event.keyCode === 13){
+      eventHandleClick(event);
+    }
+    return;
+  }
+
   //re-render
   return (
     <div className="App">
@@ -45,7 +52,7 @@ function App() {
             )
           })}
         </div>
-        <input type="text" value={address} onChange={(event) => { handleOnChangeInput(event) }} />
+        <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
         <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
       </header>
     </div>
