@@ -1,7 +1,9 @@
 import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
-import { useState } from 'react';
+import Todo from './views/Todo';
+
 
 
 function App() {
@@ -9,9 +11,10 @@ function App() {
   let [name, setName] = useState('Andrew Nguyen');
   let [address, setAddress] = useState('');
   let [todos, setTodo] = useState([
-    { id: '1', title: "Learn React" },
-    { id: '2', title: "Play games" },
-    { id: '3', title: "Do homework" }
+    { id: '1', title: "Learn React", type: "Andrew Nguyen" },
+    { id: '2', title: "Play games", type: "HA" },
+    { id: '3', title: "Do homework", type: 'Andrew Nguyen' },
+    { id: '4', title: "Chillin' with music", type: 'HA' }
   ]);
 
   const eventHandleClick = (event) => {
@@ -19,7 +22,7 @@ function App() {
       alert('Empty input!');
       return;
     }
-    let newTodo = { id: "abc", title: address };
+    let newTodo = { id: 'abc', title: address, type: 'Andrew Nguyen' };
     setTodo([...todos, newTodo]);
     setAddress('');
   }
@@ -38,20 +41,21 @@ function App() {
   //re-render
   return (
     <div className="App">
-      <Nav />
       <header className="App-header">
+      <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Hello world with React.js and {name}
         </p>
-        <div className="todo-container">
-          {todos.map((todo) => {
-            console.log(">>>>>check todo", todo.title);
-            return (
-              <li className="todo-child" key={todo.id}>{todo.title}</li>
-            )
-          })}
-        </div>
+        <Todo 
+          todos = {todos}
+          title = "All Todos"
+        />
+
+        <Todo
+          todos = {todos.filter((item) => item.type == "Andrew Nguyen")}
+          title = "Andrew's Todos"
+        />
         <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
         <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
       </header>
