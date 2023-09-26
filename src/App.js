@@ -11,10 +11,10 @@ function App() {
   let [name, setName] = useState('Andrew Nguyen');
   let [address, setAddress] = useState('');
   let [todos, setTodo] = useState([
-    { id: '1', title: "Learn React", type: "Andrew Nguyen" },
-    { id: '2', title: "Play games", type: "HA" },
-    { id: '3', title: "Do homework", type: 'Andrew Nguyen' },
-    { id: '4', title: "Chillin' with music", type: 'HA' }
+    { id: 1, title: "Learn React", type: "Andrew Nguyen" },
+    { id: 2, title: "Play games", type: "HA" },
+    { id: 3, title: "Do homework", type: 'Andrew Nguyen' },
+    { id: 4, title: "Chillin' with music", type: 'HA' }
   ]);
 
   const eventHandleClick = (event) => {
@@ -22,7 +22,7 @@ function App() {
       alert('Empty input!');
       return;
     }
-    let newTodo = { id: 'abc', title: address, type: 'Andrew Nguyen' };
+    let newTodo = { id: Math.floor(Math.random() * 100000  +1 ), title: address, type: 'Andrew Nguyen' };
     setTodo([...todos, newTodo]);
     setAddress('');
   }
@@ -38,6 +38,12 @@ function App() {
     return;
   }
 
+  const deleteDataTodo = (id) => {
+    let currentArr = todos;
+    currentArr = currentArr.filter((item) => item.id !== id);
+    setTodo(currentArr);
+  }
+
   //re-render
   return (
     <div className="App">
@@ -50,11 +56,13 @@ function App() {
         <Todo 
           todos = {todos}
           title = "All Todos"
+          deleteDataTodo = {deleteDataTodo}
         />
 
         <Todo
-          todos = {todos.filter((item) => item.type == "Andrew Nguyen")}
+          todos = {todos.filter((item) => item.type === "Andrew Nguyen")}
           title = "Andrew's Todos"
+          deleteDataTodo = {deleteDataTodo}
         />
         <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
         <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
