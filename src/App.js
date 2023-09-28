@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
+import Users from './views/Users';
 import Todo from './views/Todo';
 
 
@@ -51,9 +52,11 @@ function App() {
       <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello world with React.js and {name}
+          List of the users in the {name}'s system
         </p>
-        <Todo 
+        <Users />
+
+        {/* <Todo 
           todos = {todos}
           title = "All Todos"
           deleteDataTodo = {deleteDataTodo}
@@ -65,7 +68,9 @@ function App() {
           deleteDataTodo = {deleteDataTodo}
         />
         <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
-        <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
+        <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button> */}
+        
+        
       </header>
     </div>
   );
