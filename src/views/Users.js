@@ -3,16 +3,26 @@ import axios from "axios";
 
 const Users = () => {
     const [userData, setUserData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
     
     useEffect(async () => {
         setTimeout(async ()=>{
-            let res = await axios.get('https://jsonplaceholder.typicode.com/users')
-            let data = res && res.data ? res.data : [];
-            setUserData(data);
-            console.log(">>>>>>check data: ", data);
-            setLoading(false);
+            try{
+                let res = await axios.get('https://jsonplaceholder.typicode.com/users')
+                let data = res && res.data ? res.data : [];
+                setUserData(data);
+                console.log(">>>>>>check data: ", data);
+                setIsLoading(false);
+                setIsError(false);
+            }
+            catch(e){
+                setIsLoading(false);
+                setIsError(true);
+            }        
         }, 1000);
+        
+        
     },[]);
     
     
@@ -30,7 +40,7 @@ const Users = () => {
             </thead>
 
             <tbody>
-                {loading === false && userData && userData.length > 0 &&
+                {isError === false && isLoading === false && userData && userData.length > 0 &&
                 userData.map((item)=>{
                     return(
                         <tr key={item.id}>
@@ -44,9 +54,15 @@ const Users = () => {
                     )           
                 })}
 
-                {loading === true && 
+                {isLoading === true && 
                     <tr>
                         <td colSpan='6' style = {{'textAlign': 'center'}}>Loading...</td>
+                    </tr>
+                }
+
+                {isError === true && 
+                    <tr>
+                        <td colSpan='6' style = {{'textAlign': 'center'}}>Something is wrong... can't find the data!</td>
                     </tr>
                 }
             </tbody>
