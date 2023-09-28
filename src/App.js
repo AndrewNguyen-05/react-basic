@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
-import Users from './views/Users';
+import User from './views/User';
 import Todo from './views/Todo';
 
 
@@ -54,7 +54,7 @@ function App() {
         <p>
           List of the users in the {name}'s system
         </p>
-        <Users />
+        <User />
 
         {/* <Todo 
           todos = {todos}

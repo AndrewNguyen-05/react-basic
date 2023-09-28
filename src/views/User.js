@@ -1,31 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import useFetch from "../customs/fetch";
 
-const Users = () => {
-    const [userData, setUserData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
-    
-    useEffect(async () => {
-        setTimeout(async ()=>{
-            try{
-                let res = await axios.get('https://jsonplaceholder.typicode.com/users')
-                let data = res && res.data ? res.data : [];
-                setUserData(data);
-                console.log(">>>>>>check data: ", data);
-                setIsLoading(false);
-                setIsError(false);
-            }
-            catch(e){
-                setIsLoading(false);
-                setIsError(true);
-            }        
-        }, 1000);
-        
-        
-    },[]);
-    
-    
+const User = () => {   
+    const {data: userData, isLoading, isError} = useFetch('https://jsonplaceholder.typicode.com/users');
     return (
         <table className='users'>
             <thead>
@@ -70,4 +46,4 @@ const Users = () => {
     )
 }
 
-export default Users;
+export default User;
