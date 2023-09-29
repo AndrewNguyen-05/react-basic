@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
+import { Countdown, NewCountDown } from './views/Countdown';
 import Todo from './views/Todo';
 
 
@@ -45,12 +46,19 @@ function App() {
     setTodo(currentArr);
   }
 
+  const alertOnTime = () => {
+    alert("Time out!");
+  }
+
   //re-render
   return (
     <div className="App">
       <header className="App-header">
       <Nav />
         <img src={logo} className="App-logo" alt="logo" />
+        <Countdown alertOnTime = {alertOnTime}/>
+        <span>------------</span>
+        <NewCountDown alertOnTime = {alertOnTime}/>
         <p>
           List of the users in the {name}'s system
         </p>
