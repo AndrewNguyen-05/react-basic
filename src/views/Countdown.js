@@ -1,55 +1,55 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 
-class Countdown extends React.Component{
-
+class ClassCountDown extends React.Component{
     state = {
-        count: 5,
-        title: 'class'
+        count: 10
     }
 
-    componentDidMount() {
-        this.timer = setInterval(() => {
+    componentDidMount(){
+        this.Timer = setInterval(() => {
             this.setState({
                 count: this.state.count - 1
-            })
+            });
         }, 1000);
     }
 
     componentDidUpdate(prevProps, prevState){
-        if(prevState.count !== this.state.count && this.state.count === 0){
-            if(this.timer){
-                clearInterval(this.timer);
-                this.props.alertOnTime();
-            }
+        if(prevState.Timer !== this.state.count && this.state.count === 0){
+            clearInterval(this.Timer);
+            // this.props.alertOnTime();
         }
     }
 
     render() {
-        return <div>{this.state.count} / {this.state.title}</div>;
+        return (
+            <div>{this.state.count} / Class</div>
+        )
     }
-        
 }
 
-const NewCountDown = () => {
-    const [count, setCount] = useState(5);
-    const [title, setTitle] = useState('Hook');
+const HookCountDown = (props) => {
+    const [count, setCount] = useState(10);
 
     useEffect(() => {
-        if(count === 0) return;
+        if(count === 0){
+            props.alertOnTime();
+            return;
+        }
 
         let timer = setInterval(() => {
             setCount(count - 1);
-        }, 1000);
+        },  1000)
 
         return () => {
-            clearInterval(timer);
+            clearInterval(timer)
         }
-    }, [count]);
+    
+    }, [count])
 
     return (
-        <div>{count} / {title}</div>
+        <div>{count} / Hooks</div>
     )
 }
 
-export {Countdown, NewCountDown};
+export {ClassCountDown, HookCountDown};

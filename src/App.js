@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
-import { Countdown, NewCountDown } from './views/Countdown';
+import {ClassCountDown, HookCountDown} from './views/Countdown';
 import Todo from './views/Todo';
 
 
@@ -47,7 +47,7 @@ function App() {
   }
 
   const alertOnTime = () => {
-    alert("Time out!");
+    alert('Time out!');
   }
 
   //re-render
@@ -56,9 +56,9 @@ function App() {
       <header className="App-header">
       <Nav />
         <img src={logo} className="App-logo" alt="logo" />
-        <Countdown alertOnTime = {alertOnTime}/>
-        <span>------------</span>
-        <NewCountDown alertOnTime = {alertOnTime}/>
+        <ClassCountDown alertOnTime = {alertOnTime}/>
+        <span>------------------</span>
+        <HookCountDown alertOnTime = {alertOnTime}/>
         <p>
           List of the users in the {name}'s system
         </p>
