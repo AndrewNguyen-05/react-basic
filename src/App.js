@@ -3,7 +3,13 @@ import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
-import {ClassCountDown, HookCountDown} from './views/Countdown';
+import { ClassCountDown, HookCountDown } from './views/Countdown';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
 import Todo from './views/Todo';
 
 
@@ -24,7 +30,7 @@ function App() {
       alert('Empty input!');
       return;
     }
-    let newTodo = { id: Math.floor(Math.random() * 100000  +1 ), title: address, type: 'Andrew Nguyen' };
+    let newTodo = { id: Math.floor(Math.random() * 100000 + 1), title: address, type: 'Andrew Nguyen' };
     setTodo([...todos, newTodo]);
     setAddress('');
   }
@@ -34,7 +40,7 @@ function App() {
   }
 
   const handleKeyPress = (event) => {
-    if(event.keyCode === 13){
+    if (event.keyCode === 13) {
       eventHandleClick(event);
     }
     return;
@@ -46,41 +52,48 @@ function App() {
     setTodo(currentArr);
   }
 
+
   const alertOnTime = () => {
     alert('Time out!');
   }
 
   //re-render
   return (
-    <div className="App">
-      <header className="App-header">
-      <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <ClassCountDown alertOnTime = {alertOnTime}/>
-        <span>------------------</span>
-        <HookCountDown alertOnTime = {alertOnTime}/>
-        <p>
-          List of the users in the {name}'s system
-        </p>
-        <User />
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
 
-        {/* <Todo 
-          todos = {todos}
-          title = "All Todos"
-          deleteDataTodo = {deleteDataTodo}
-        />
+          <Switch>
+            <Route path="/" exact>
+              <p>
+                List of the users in the {name}'s system
+              </p>
+              <User />
+            </Route>
+            <Route path="/timer">
+              <ClassCountDown alertOnTime={alertOnTime} />
+              <span>-----------------------</span>
+              <HookCountDown alertOnTime={alertOnTime} />
+            </Route>
+            <Route path="/todo">
+              <Todo
+                todos={todos}
+                title="All Todos"
+                deleteDataTodo={deleteDataTodo}
+              />
+              <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
+              <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
+            </Route>
+            <Route>
 
-        <Todo
-          todos = {todos.filter((item) => item.type === "Andrew Nguyen")}
-          title = "Andrew's Todos"
-          deleteDataTodo = {deleteDataTodo}
-        />
-        <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
-        <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button> */}
-        
-        
-      </header>
-    </div>
+            </Route>
+          </Switch>
+
+        </header>
+      </div>
+    </Router>
   );
 }
 
