@@ -5,9 +5,14 @@ class ClassCountDown extends React.Component {
     state = {
         count: 10
     }
+    componentWillUnmount() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+    }
 
     componentDidMount() {
-        this.Timer = setInterval(() => {
+        this.timer = setInterval(() => {
             this.setState({
                 count: this.state.count - 1
             });
@@ -15,8 +20,8 @@ class ClassCountDown extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.Timer !== this.state.count && this.state.count === 0) {
-            clearInterval(this.Timer);
+        if (prevState.timer !== this.state.count && this.state.count === 0) {
+            clearInterval(this.timer);
             // this.props.alertOnTime();
         }
     }
