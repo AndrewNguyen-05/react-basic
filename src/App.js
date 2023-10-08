@@ -3,6 +3,8 @@ import { useState } from 'react';
 import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
+import Blog from './views/Blog';
+import Detailblog from './views/Detailblog';
 import { ClassCountDown, HookCountDown } from './views/Countdown';
 import {
   BrowserRouter as Router,
@@ -85,6 +87,12 @@ function App() {
               />
               <input type="text" value={address} onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => { handleOnChangeInput(event) }} />
               <button type="button" onClick={(event) => eventHandleClick(event)}>Click me!</button>
+            </Route>
+            <Route path="/blog" exact>
+              <Blog />
+            </Route>
+            <Route path="/blog/:id">
+              <Detailblog />
             </Route>
             <Route>
 
