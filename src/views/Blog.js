@@ -1,6 +1,6 @@
 import useFetch from "../customs/fetch";
 import "./Blog.scss"
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom";
 
 const Blog = () => {
     const { data: dataBlog, isLoading, isError } = useFetch('https://jsonplaceholder.typicode.com/posts');
@@ -9,25 +9,35 @@ const Blog = () => {
         newData = dataBlog.slice(0, 9);
     }
 
+    let history = useHistory();
+
+    const handleAddNew = () => {
+        return history.push('/add-new-blog');
+    }
+
     return (
-        <div className="blog-container">
-            {isLoading === false && newData && newData.length > 0 && newData.map((item) => {
-                return (
-                    <div className="single-blog">
-                        <div className="title">title: {item.title}</div>
-                        <div className="content">content: {item.body}</div>
-                        <button>
-                            <Link to={`/blog/${item.id}`}>
-                                View details
-                            </Link>
-                        </button>
-                    </div>
-                );
-            })}
-            {isLoading === true && <div>
-                Loading data....
-            </div>}
-        </div>
+        <>
+            <div className="btn-add-new" onClick={handleAddNew}><button>+ Add new blog</button></div>
+            <div className="blog-container">
+                {isLoading === false && newData && newData.length > 0 && newData.map((item) => {
+                    return (
+                        <div className="single-blog">
+                            <div className="title">title: {item.title}</div>
+                            <div className="content">content: {item.body}</div>
+                            <button>
+                                <Link to={`/blog/${item.id}`}>
+                                    View details
+                                </Link>
+                            </button>
+                        </div>
+                    );
+                })}
+                {isLoading === true && <div>
+                    Loading data....
+                </div>}
+            </div>
+        </>
+
     )
 }
 

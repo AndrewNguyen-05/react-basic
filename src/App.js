@@ -4,7 +4,8 @@ import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
 import Blog from './views/Blog';
-import Detailblog from './views/Detailblog';
+import DetailBlog from './views/DetailBlog';
+import AddNewBlog from './views/AddNewBlog';
 import { ClassCountDown, HookCountDown } from './views/Countdown';
 import {
   BrowserRouter as Router,
@@ -92,7 +93,10 @@ function App() {
               <Blog />
             </Route>
             <Route path="/blog/:id">
-              <Detailblog />
+              <DetailBlog />
+            </Route>
+            <Route path="/add-new-blog">
+              <AddNewBlog />
             </Route>
             <Route>
 

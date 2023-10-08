@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router-dom/cjs/react-router-dom";
 import useFetch from "../customs/fetch";
 import './Blog.scss'
 
-const Detailblog = () => {
+const DetailBlog = () => {
     let { id } = useParams();
     let history = useHistory();
     const handleBackData = () => {
@@ -27,4 +27,4 @@ const Detailblog = () => {
     )
 }
 
-export default Detailblog;
+export default DetailBlog;
