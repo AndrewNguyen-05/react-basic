@@ -6,7 +6,8 @@ const AddNewBlog = () => {
     const [content, setContent] = useState('');
 
     const handleSubmitForm = () => {
-        console.log(">>> Check input state: ", title, content);
+        if (!title) alert('Empty title');
+        if (!content) alert('Empty content');
     }
 
     return (
