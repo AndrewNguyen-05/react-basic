@@ -1,11 +1,21 @@
 import './Blog.scss';
 import { useState } from 'react';
+import axios from 'axios';
 
 const AddNewBlog = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const handleSubmitForm = () => {
+    const handleSubmitForm = async () => {
+
+        let data = {
+            title: 'foo',
+            body: 'bar',
+            userId: 1,
+        }
+
+        let res = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
+
         if (!title) alert('Empty title');
         if (!content) alert('Empty content');
     }

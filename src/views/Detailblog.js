@@ -17,7 +17,7 @@ const DetailBlog = () => {
             {dataBlogDetail &&
                 <div className="blog-detail">
                     <div className="title">
-                        Blog ID {id} --- {isLoading === true ? 'Loading...' : dataBlogDetail.title}
+                        Blog ID {id}, {isLoading === true ? 'Loading...' : dataBlogDetail.title}
                     </div>
                     <div className="content">{dataBlogDetail.body}</div>
                 </div>
