@@ -4,7 +4,7 @@ import './App.css';
 import Nav from './views/Nav.js';
 import User from './views/User';
 import Blog from './views/Blog';
-import DetailBlog from './views/DetailBlog';
+import DetailBlog from './views/DetailBlog.js';
 import AddNewBlog from './views/AddNewBlog';
 import { ClassCountDown, HookCountDown } from './views/Countdown';
 import {
